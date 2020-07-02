@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style type="text/css">
+			[v-cloak]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" >
+			<div id="" v-cloak>
+				{{message}}
+			</div>
+			<div id="" v-cloak>
+				{{message2}}
+			</div>
+			<div id="" v-cloak>
+				{{message3}}
+			</div>
+			<button type="button" @click="click($event)">Click Me</button>
+			<button type="button" @keyup.delete="clsubmit()">回车提交</button>
+			<input type="text" @keyup.enter="clsubmit()"/>
+			
+			
+			 <!-- 默认最后一个参数传递事件 事件名称为$event-->
+		</div>
+		
+	</body>
+	<script>
+		var app = new Vue({
+			
+			el:'#app',
+			data:{
+				message:'请点击按钮'
+			},
+			methods:{
+				clsubmit:function(){
+					this.message = '0 '
+					this.message2 = '已经提交'
+				},
+				click:function(event){
+					// console.log(event.target.innerHTML)
+					this.message2 = event.target.innerHTML
+					this.message = '已经点击按钮'
+					
+				}
+			}
+		})
+		
+	</script>
+</html>

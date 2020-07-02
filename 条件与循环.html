@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<p>---------条件------------------------------------------------------</p>
+		<div id="app-3">
+			<p v-if="seen">我出现了</p>
+		</div>
+		<p>---------条件------------------------------------------------------</p>
+		<p>---------循环------------------------------------------------------</p>
+		<div id="app-4">
+			<ol>
+				<li v-for="todo in todos">
+					{{todo.text}}
+				</li>
+			</ol>
+		</div>
+		<p>---------循环------------------------------------------------------</p>
+	</body>
+	<script type="text/javascript">
+		var app3 = new Vue({
+			el: '#app-3',
+			data:{
+				seen:true,
+				//再控制台输入 app3.seen = false p标签里的文字消失
+				
+			}
+		})
+		var app4 = new Vue({
+			el:'#app-4',
+			data:{
+				todos:[
+					{text:'study'},
+					{text:'learn'},
+					{text:'all'}
+					],
+					//控制台输入app4.todos.push({text:'xxxxx'})
+			
+			}
+		})
+	</script>
+</html>

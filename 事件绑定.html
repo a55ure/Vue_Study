@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style type="text/css">
+			[v-cloak]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="" v-cloak>
+				{{num}}
+			</div>
+			<button type="button" v-on:click="num++">+1</button>
+			<button type="button" v-on:click="num--">-1</button>
+			<button type="button" @click="add">+1</button>
+			<button type="button" @click="sub()">-1</button>
+		</div>
+	</body>
+	<script>
+		var app = new Vue({
+			el:'#app',
+			data:{
+				num:0
+			},
+			methods:{
+				add:function(){
+					this.num++
+				},
+				sub:function(){
+					this.num--
+				}
+			}
+		})
+	</script>
+</html>

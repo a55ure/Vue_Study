@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<p>----文本----------------</p>
+		<span id="">
+			Message:{{msg}}
+		</span>
+		<span id="" v-once>
+			这个将不会改变：{{msg}}
+		</span>
+		<p>----原始HTML----------------</p>
+		<p>Using mustaches:{{rawHtml}}</p>
+		<p>Using v-html directive:
+			<span id="" v-html="rawHtml">
+				这不止是文本
+			</span>
+		</p>
+	</body>
+	<script>
+		
+	</script>
+</html>

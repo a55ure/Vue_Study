@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{a}}
+		</div>
+	</body>
+	<script type="text/javascript">
+		var data = {a : 1} //给a赋值
+		vm.$watch('a',function(newVal, oldVal){
+			console.log(newVal, oldVal);
+		})
+		var vm = new Vue({
+			el:'#app', //获取元素
+			data:data   //给获取的元素赋值
+		});
+		vm.$data.a = 2
+		vm.$watch('a',function(newVal, oldVal){
+			console.log(newVal, oldVal);
+		})
+		vm.$data.a = "erasfgaegh";
+	</script>
+</html>

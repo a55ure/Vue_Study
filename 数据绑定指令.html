@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		 <!-- v-text填充纯文本 -->
+		  <!-- v-html 添加html片段 存在安全问题 -->
+		   <!-- v-pre 填充原始信息 -->
+		    <!-- v-once 只加载一次  -->
+		<div id="app">
+			<span v-text="message"></span>
+			<span id="" v-html="message2">
+				  
+			</span>
+			
+		</div>
+	</body>
+	<script>
+		var app = new Vue({
+			el:'#app',
+			data:{
+				message:'Hello world!!!!',
+				message2:'<h1> Hi world!</h1>'
+				}
+		})
+		
+	</script>
+</html>
