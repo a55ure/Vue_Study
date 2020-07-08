@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+			#app{
+				height: 100px;
+				width: 100px;
+				background-color: #A9A9A9;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" >
+			<button type="button" v-color="bgc">变色</button>
+		</div>
+	</body>
+	<script>
+		Vue.directive('color',{
+			bind:function(el,binging){
+				console.log(binging.value)
+				el.style.backgroundColor = binging.value
+			}
+		})
+		 var app = new Vue({
+			el:'#app',
+			data:{
+				bgc:'yellow'
+			}
+		})
+	</script>
+</html>

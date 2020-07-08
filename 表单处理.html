@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+	</head>
+		
+	<body>
+		<div id="app">
+			<form action="" method="">
+				<div id="">
+					
+				</div>
+				<span id="">
+					姓名：
+				</span>
+				<input type="text" name="" id="" value="" />
+				<br>
+				<span>性别：</span>
+				<input type="radio" name="sex" id="male" value="1"  v-model="gender"/>
+				<label for="male">男</label>
+				<input type="radio" name="sex" id="female" value="2"  v-model="gender"/>
+				<label for="female">女</label>
+				<div id="">
+					<span>爱好：</span>	
+					<input type="checkbox" name="" id="ball" value="1" v-model="hoppy"/>
+					<label for="ball">篮球</label>
+					<input type="checkbox" name="" id="football" value="2" v-model="hoppy"/>
+					<label for="football">足球</label>
+					<input type="checkbox" name="" id="code" value="3" v-model="hoppy"/>
+					<label for="code">Cookcode</label>
+				</div>
+				
+			</form>
+		</div>
+	</body>
+	<script>
+		 var app = new Vue({
+			el:'#app',
+			data:{
+				gender:1,
+				hoppy:[]
+			}
+		})
+	</script>
+</html>

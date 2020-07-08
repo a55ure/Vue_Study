@@ -5,45 +5,93 @@
 		<title></title>
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
 			[v-cloak]{
 				display:none;
 			}
-			.con{
-				margin-top: 25%;
+			#app{
+				margin: auto;
 				text-align: center;
+				height: 90%;
+				width: 60%;
+			}
+			.con{
+				border-radius: 20px;
+				margin-top: 5%;
+				background-color: antiquewhite;
+				height: 100%;
+				width: 100%;
+				padding-bottom: 5%;
+			}
+			#in{
+				margin-top: 7%;
+				border: none;
+				border-radius: 20px;
+				width: 80%;
+				height: 10%;
+				margin-bottom:7% ;
+				font-size: 30px;
+				text-indent: 10px;
+			}
+			.bn{
+				font-size: 50px;
+				margin: 5px;
+				border: none;
+				border-radius: 20px;
+				height: 150px;
+				width: 100px;
+			}
+			.bn:hover{
+				background-color: #e5a83473;
 			}
 		</style>
 	</head>
 	<body>
 		<div id="app">
 			<div class="con">
-				<input type="" name="" id="" value="" />
+				<input type="text" name="" id="in" value="" v-model="datas" />
 				<div id="">
-					<button type="button">1</button>
-					<button type="button">2</button>
-					<button type="button">3</button>
-					<button type="button">ac</button>
-					<button type="button">=</button>
+					<button class="bn" type="button" v-on:click ="cN($event)">1</button>
+					<button class="bn" type="button" @click="cN">2</button>
+					<button class="bn" type="button">3</button>
+					<button class="bn" type="button">c</button>
+					<button class="bn" type="button">=</button>
 				</div>
 				<div id="">
-					<button type="button">4</button>
-					<button type="button">5</button>
-					<button type="button">6</button>
-					<button type="button">+</button>
-					<button type="button">-</button>
+					<button class="bn" type="button">4</button>
+					<button class="bn" type="button">5</button>
+					<button class="bn" type="button">6</button>
+					<button class="bn" type="button">-</button>
+					<button class="bn" type="button">+</button>
 				</div>
 				<div id="">
-					<button type="button">7</button>
-					<button type="button">8</button>
-					<button type="button">9</button>
-					<button type="button">*</button>
-					<button type="button">/</button>
+					<button class="bn" type="button">7</button>
+					<button class="bn" type="button">8</button>
+					<button class="bn" type="button">9</button>
+					<button class="bn" type="button">*</button>
+					<button class="bn" type="button">/</button>
 				</div>
 			</div>
 			
 		</div>
 	</body>
 	<script>
-		
+		var app = new Vue({
+			el:app,
+			data:{
+				datas:''
+			},
+			methods:{
+				cN:function(event){
+					this.datas = 1
+				}
+			}
+			
+		});
 	</script>
 </html>

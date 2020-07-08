@@ -24,6 +24,9 @@
 			<button type="button" @click="click($event)">Click Me</button>
 			<button type="button" @keyup.delete="clsubmit()">回车提交</button>
 			<input type="text" @keyup.enter="clsubmit()"/>
+			<input type="text" @keyup.a="nameCode" />
+			<!-- enter 再input里使用 -->
+			 
 			
 			
 			 <!-- 默认最后一个参数传递事件 事件名称为$event-->
@@ -31,6 +34,7 @@
 		
 	</body>
 	<script>
+		Vue.config.keyCodes.a = 66;//输入与后面的值（ascii码）对应的字母，才有效 
 		var app = new Vue({
 			
 			el:'#app',
@@ -46,7 +50,9 @@
 					// console.log(event.target.innerHTML)
 					this.message2 = event.target.innerHTML
 					this.message = '已经点击按钮'
-					
+				},
+				nameCode:function(event){
+					console.log(event.keyCode)
 				}
 			}
 		})

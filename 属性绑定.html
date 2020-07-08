@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none; 
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			 <!-- v-bind 简写为: -->
+			<a v-bind:href="url"><button type="button" v-cloak>不想知道{{message}}一下</button></a>
+			
+			<button type="button" @click="trans">切换引擎</button>
+			<div id="">
+				{{message1}}
+			</div>
+			 <!-- 通过v-bind 来绑定属性  v-on绑定事件函数-->
+			<input type="text" :value="message1" @input="message1 = $event.target.value" />
+		</div>
+	</body>
+	<script>
+		var flag = 0  //0代表百度，1代表必应
+		var app = new Vue({
+			el:'#app',
+			data:{
+				message1:' ',
+				message:'百度',
+				url:'https://www.baidu.com'
+			},
+			methods:{
+				trans:function(){
+					if(flag == 0){
+						this.url = 'https://www.bing.com';
+						this.message = 'BING'
+						flag = 1
+					}else{
+						this.url = 'https://www.baidu.com'
+						this.message = '百度'
+						flag = 0
+					}
+					
+				}
+			}
+		})
+	</script>
+</html>

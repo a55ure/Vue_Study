@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+			.active{
+				height: 200px;
+				width: 200px;
+				border: black 2px;
+				background-color: #FAEBD7;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div :class="{active: isActive}">
+				
+			</div>
+			<button type="button" @click="clear">去除样式</button>
+		</div>
+	</body>
+	<script>
+		var app = new Vue({
+			el:'#app',
+			data:{
+				isActive:true 
+			},
+			methods:{
+				clear:function(){
+					this.isActive = !this.isActive
+				}
+				}
+		})
+		
+	</script>
+</html>

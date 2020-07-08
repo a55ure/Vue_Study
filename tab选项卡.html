@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+			#app ul {
+				list-style: none;	
+				padding: 0px;
+			}
+			#app ul li{
+				border: #000000 1px solid;
+				border-radius: 20px;
+				margin: auto;
+				text-align: center;
+				width: 100px;
+				height: 30px;
+				padding-top:9px ;
+				float: left;
+				margin-right: 5px;
+				cursor: pointer;
+			}
+			#app ul li:hover{
+				font-weight: bolder;
+				}
+			.img_div{
+				width: 408px;
+				height: 600px;
+				display: none;
+				margin: auto;
+				
+			}
+			.con_div div {
+				width: 430px;
+				height: 600px;
+				display: none;
+				margin: auto;
+				
+				border: #000000 1px solid;
+			}
+			.active{
+				background-color: darkgrey;
+			}
+			.con_div div.timg{
+				display: block;
+				margin: auto;
+					
+			}
+			.con_div div.timg img{
+				width: 408px;
+				height: 500px;
+				
+			}
+			
+			
+		</style>
+	</head>
+	<body> 
+		<div id="app">
+			<div class="con_div">
+				<ul>
+					<li v-on:mouseover="over()" v-on:click="change(index)" v-bind:class="Tindex == index?'active':''" v-for="(item,index) in list" :key="item.id">{{item.title}}</li>
+					
+					<!-- <li>Apple</li>
+					<li>Samsung</li>
+					<li>Oneplus</li>
+					<li>LG</li> -->
+				</ul>
+				<div  v-for="(item,index) in list" v-bind:class="Tindex == index?'timg':''"	:key="item.id">
+					<!-- {{item.path}} -->
+						<img   v-bind:src="item.path" >
+				</div>
+			</div>
+			
+			
+		</div>
+	</body>
+	<script>
+		 var app = new Vue({
+			el:'#app',
+			data:{
+				Tindex:0,
+				list:[{
+					id:1,
+					title:'Apple',
+					path:'img/apple.png'
+				},{
+					id:2,
+					title:'Samsung',
+					path:'img/samsung.png'
+				},{
+					id:3,
+					title:'Oneplus',
+					path:'img/oneplus.png'
+				},{
+					id:4,
+					title:'LG',
+					path:'img/lg.png'
+				}
+				]
+			},
+			methods:{
+				change:function(index){
+					this.Tindex = index
+				}
+			}
+		})
+		
+	</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="item in car">{{item}}</li>
+				<li v-for="(item,index) in car">{{index+1 +'.'+item}}</li>
+				<li v-for="item in myCar">
+					<span>{{item.fn}}</span>
+					<!-- {{item.fn+ '---'+item.ln}} -->
+						<span>{{item.ln}}</span>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script>
+		 var app = new Vue({
+			el:'#app',
+			data:{
+				car:['BMW','land','bencd'],
+				myCar:[
+					{
+						fn:'n',
+						ln:'香蕉'
+					},
+					{
+						fn:'b',
+						ln:'蕉'
+					},
+					{
+						fn:'d',
+						ln:'香'
+					},
+					
+					]
+			}
+		})
+	</script>
+</html>

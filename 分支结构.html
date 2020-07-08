@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<!-- <div id="">
+				{{check_num}}
+			</div>
+			<input type="text" v-model="in_num" />
+			<div id="" v-cloak>
+				{{in_num}}
+			</div>
+			<button type="button" @click="check">查询</button> -->
+			<div id="" v-if="check_num >= 90">
+				Good
+			</div>
+			<div id="" v-else>
+				Bad
+			</div>
+			
+			<!-- <div id="" v-else-if="check_num <90 && check_num =>80">
+				no Good
+			</div> -->
+		</div>
+	</body>
+	<script>
+		var app = new Vue({
+			el:'#app',
+			data:{
+				// in_num:null,
+				check_num:null,
+				
+			},
+			methods:{
+				check:function(){
+					// console.log(this.in_num)
+					check_num = this.in_num
+					console.log(check_num)
+				}
+			}
+		})
+		
+	</script>
+</html>
