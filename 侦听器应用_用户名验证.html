@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div id="">
+				<input type="text"  v-model.lazy="usename" />
+				<span>{{tip}}</span>
+			</div>
+		</div>
+	</body>
+	<script>
+		 var app = new Vue({
+			el:'#app',
+			data:{
+				usename:'',
+				tip:''
+			},
+			methods:{
+				check:function(name){
+					var that = this
+					setTimeout(function(){
+						console.log('已经调用'+name+that.tip)
+						if(name == 'yks'){
+							that.tip = '用户名已经被使用！'
+							console.log()
+						}else{
+							that.tip = '用户名可用！'
+						}
+					},2000)
+				}
+			},
+			watch:{
+				usename:function(val){//侦听usename是否发生改变
+					this.check(val)
+					this.tip = '正在验证...'
+				}
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html{
+				background-color:#ffe4c41c ;
+			}
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+			.topBar{
+				text-align: center;
+				height: 70px;
+				width: 100%;
+				background-color: aliceblue;
+				line-height: 70px;
+				font-size: 30px;
+				font-weight: bolder;
+				position: fixed;
+				
+				
+			}
+			.model{
+				height: 120px;
+				width: 100%;
+				
+			}
+			.in_book{
+				height: 30px;
+				width: 30%;
+				border-radius: 20px;
+				text-decoration: none;
+				border: 1px black solid;
+				text-indent: 15px;
+				outline: none;
+				font-size: 15px;
+			}
+			.in_bookButton{
+				height: 35px;
+				border-radius: 20px;
+				width: 10%;
+				background-color: cornflowerblue;
+				border: none;
+				color: white;
+				font-size: 15px;
+				font-weight: bold;
+				outline: none;
+				line-height: 35px;
+				cursor: pointer;
+			}
+			.in_bookButton:hover{
+				background-color: #6495edad;
+			}
+		
+			.inBook{
+				margin: auto;
+				text-align: center;
+			}
+			.inBook span{
+				font-size: 20px;
+			}
+			.list{
+				
+				list-style: none;
+				padding: 0px;
+			}
+			.list li{
+				float: left;
+			}
+			.bookTable{
+				margin: auto;
+				text-align: center;
+				width: 70%;
+				margin-top: 50px;
+				border: darkgrey;
+				height: 75px;
+				font-size: 20px;
+			}
+			/* .bookTable tr:nth-child(1){
+			} */
+			td:nth-of-type(1){
+				width: 50px;
+			}
+			td:nth-of-type(4){
+				width: 200px;
+			}
+			.optionButton{
+				border: 0px;
+				background-color: #6495ED;
+				color: white;
+				outline: none;
+				cursor: pointer;
+				height: 30px;
+				width: 50px;
+			}
+			.optionButton:hover{
+				background-color: #6495edad;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="topBar">
+				<span>图书管理</span>
+			</div>
+		<div id="app">
+			<div class="model"></div>
+			<!-- 输入图书 -->
+			<div class="inBook" style="width: 100%; height: 100%;">
+				<!-- <span>编号</span> -->
+				<input type="text" class="in_book" placeholder="编号" v-model="bookId" v-bind:disabled="flag"/>
+				<!-- <span>书名</span> -->
+				<input type="text" class="in_book" placeholder="书名" v-model="bookName"/>
+				<button type="button" class="in_bookButton" @click="add" v-cloak>{{in_bookButton}}</button>
+				<!-- <button type="button" class="in_bookButton" @click="del">删除</button>
+				<button type="button" class="in_bookButton" @click="change">修改</button> -->
+				<div class="" style="width: 100%; height: 50px;">
+					<!-- <div class="">
+						图书数量: <span v-cloak>{{total}}</span> 
+					</div> -->
+					<!-- <span>
+						编号
+						<ul class="list">
+							<li>编号</li>
+							<li>名称</li>
+							<li>时间</li>
+							<li>操作</li>
+						</ul>
+					</span>
+					<span>名称</span>
+					<span>时间</span>
+					<span>操作</span>
+					<ul>
+						<li v-for="item in bookList">{{item.id}}</li>
+						<li v-for="item in bookList">{{item.name}}</li>
+					</ul> -->
+				<table border="1px" cellspacing="0" cellpadding="0" class="bookTable">
+					<tr>
+						<td colspan="4"><span>图书数量:</span> <span v-cloak>{{total}}</span> </td>
+						<!-- <td></td> -->
+						<!-- <td></td> -->
+					</tr>
+					<tr>
+						<td>编号</td>
+						<td>名称</td>
+						<td>时间</td>
+						<td>操作</td>
+					</tr>
+					<tr style="height: 40px;" v-for="item in bookList">
+						<td style="height: 40px;" v-cloak>{{item.id}}</td>
+						<td v-cloak>{{item.name}}</td>
+						<td v-cloak>{{date | format('yyyy-MM-dd-hh-ss-SS')}}</td>
+						<td>
+							<button class="optionButton" @click="del(item.id)" style="border-bottom-left-radius: 15px; border-top-left-radius: 15px;" type="button">删除</button><button class="optionButton" @click="change(item.id)" style="border-top-right-radius: 15px; border-bottom-right-radius: 15px;" type="button">修改</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+			</div>
+			
+			
+			<div class="book_con">
+				
+			</div>
+			
+		</div>
+	</body>
+	<script>
+		Vue.filter('format',function(val,arge){
+			if(arge == 'yyyy-MM-dd-hh-ss-SS'){
+				var ret = '';
+				ret = val.getFullYear() + '-' + (val.getMonth() + 1)+'-'+val.getDay()+' '+val.getHours()+':'+val.getMinutes()+':'+val.getSeconds()
+			}
+			return ret
+		})
+			// var dateBook = new Date()
+		 var app = new Vue({
+			el:'#app',
+			// var 
+			data:{
+				date:new Date(),
+				flag:false,
+				in_bookButton:'添加',
+				bookId:null,
+				bookName:'',
+				bookList:[{
+					id:'1',
+					name:'JAVA',
+					
+					// date:new Date()
+				},{
+					id:'2',
+					name:'PHP',
+					// date:new Date()
+				},{
+					id:'3',
+					name:'HTML'		,
+					// date:new Date()
+				},{
+					id:'4',
+					name:'JS',
+					// date:new Date()
+				}
+					
+				],
+				
+			},
+			methods:{
+				add:function(){
+					// console.log(this.bookList)
+					if(this.in_bookButton == '添加'){
+						this.bookList.push({id:this.bookId,name:this.bookName})
+							if(this.in_bookButton == '修改'){
+								var that = this
+								setTimeout(function(){
+									that.in_bookButton = '添加'
+								},500)
+							}
+							this.bookId = ''
+							this.bookName = ''
+					}else{
+						var that = this
+						this.bookList.some(function(item){
+							if(item.id == that.bookId){
+								item.name = that.bookName
+								console.log(that.bookName)
+								return true
+							}
+						})
+						setTimeout(function(){
+							that.in_bookButton = '添加'
+						},500)
+						this.bookId = ''
+						this.bookName = ''
+						this.flag = false
+						// var that = this
+						// var book = this.bookList.filter(function(item){
+						// 	console.log(that.bookId)
+						// 	// console.log(that.bookList[0].id)
+						// 	return item.id == that.bookId
+						// })
+						// console.log(book)
+						// this.bookId
+						// this.
+					}
+									},
+				del:function(id){
+					// console.log(id)
+					// console.log(this.bookList)
+					var index = this.bookList.findIndex(function(item){
+						// console.log(item.id == id)
+						
+						return item.id == id
+					})
+					// console.log(index)
+					this.bookList.splice(index,1)
+					console.log(index)
+					console.log(this.bookList[index])
+				},
+				change:function(id){
+					// console.log(id)
+					this.in_bookButton = '修改'
+					var book = this.bookList.filter(function(item){
+						// console.log(item)
+						return item.id == id
+					})
+					// console.log(book)
+					this.bookId = book[0].id
+					this.bookName = book[0].name
+					this.flag = true
+				}
+			},
+			computed:{
+				total:function(){
+					return this.bookList.length
+				}
+			}
+		})
+		
+	</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="">
+			数据一旦发生变化 就通知侦听器所绑定的方法 
+		</div>
+		<div id="app">
+			<div id="">
+				<input type="text" v-model="firstName" />
+			</div>
+			<div id="">
+				<input type="text" v-model="lastName" />
+			</div>
+			<div id="" v-cloak>
+				{{fullName}}
+			</div>
+			
+		</div>
+	</body>
+	<script>
+		 var app = new Vue({
+			el:'#app',
+			data:{
+				firstName:'a',
+				lastName:'e',
+				// fullName:'a e' //使用监听时使用
+			},
+			computed:{//通过计算实现
+				fullName:function(){
+					return this.firstName + ' ' + this.lastName
+				}
+				
+			},
+			watch:{//通过监听实现
+				// firstName:function(val){
+				// 	this.fullName = val + ' ' + this.lastName
+				// },
+				// lastName:function(val){
+				// 	this.fullName = this.firstName + ' ' + val
+				// }
+			}
+		})
+	</script>
+</html>

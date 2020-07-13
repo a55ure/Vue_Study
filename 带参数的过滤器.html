@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<ul>
+				<li>y:年</li>
+				<li>M:年中的月份1-12</li>
+				<li>d:月份中的天1-31</li>
+				<li>h:小时</li>
+				<li>m:分钟</li>
+				<li>s:秒</li>
+				<li>S:毫秒</li>
+				<li>q:季度</li>
+				<li>				{{date | format('yyyy-MM-dd')}}</li>
+			</ul>
+			<div id="">
+				<!-- {{date | format()}} -->
+				{{date | format('yyyy-MM-dd')}}
+				{{date | format('yyyy-MM-dd')}}
+			</div>
+		</div>
+	</body>
+	<script>
+		Vue.filter('format',function(val,arge){
+			if(arge == 'yyyy-MM-dd'){
+				var ret = '';
+				ret = val.getFullYear() + '-' + (val.getMonth() + 1)+'-'+val.getDay()
+			}
+			return ret
+		})
+		 var app = new Vue({
+			el:'#app',
+			data:{
+				date:new Date()
+			}
+		})
+	</script>
+</html>

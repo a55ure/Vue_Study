@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<hw></hw>
+		</div>
+	</body>
+	<script>
+		var helloWorld = {
+			data:function(){//data是个函数
+				return{     //return 
+					message:'helloWorld'
+				}
+			},
+			template:'<div>{{message}}</div>'
+		}
+		 var app = new Vue({
+			el:'#app',
+			data:{
+				
+			},
+			components:{
+				'hw':helloWorld//局部组件只能在父组件中使用
+			}
+		})
+	</script>
+</html>
