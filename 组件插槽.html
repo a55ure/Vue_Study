@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<alert-box>一切错误</alert-box><!--将内容传递到插槽<slot>   这里如果不进行传值，默认是组件中<slot>里的值-->
+		</div>
+	</body>
+	<script>
+		Vue.component('alert-box',{
+			template:`
+				<div>
+					<strong>!error:</strong>
+					<slot></slot>
+				</div>
+			`
+		})
+		 var app = new Vue({
+			el:'#app',
+			data:{
+				
+			}
+		})
+	</script>
+</html>

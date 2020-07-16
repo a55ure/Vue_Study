@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<button type="button" @click="handle">销毁</button>
+			<tom-num></tom-num>
+			<george-num></george-num>
+		</div>
+	</body>
+	<script>
+		//事件中心
+		var hub = new Vue()
+		Vue.component('george-num',{
+			data:function(){
+				return{
+					num:0
+				}
+			},
+			template:`
+				<div>
+					GEORGE:{{num}}
+					<div><button @click='handle'>点击</button></div>
+				</div>
+			
+			`,
+			methods:{
+				handle:function(){
+					//触发兄弟的事件
+					hub.$emit('tom-num',10)
+				}
+			},
+			mounted: function(){
+				//监听事件
+				hub.$on('tom-num',(georgeVal)=>{//接收来自兄弟组件的数据
+					this.num += georgeVal
+				})
+			}
+		})
+		Vue.component('tom-num',{
+			data:function(){
+				return{
+					num:0
+				}
+			},
+			template:`
+				<div>
+					TOM:{{num}}
+					<div><button @click='handle'>点击</button></div>
+				</div>
+			`,
+			methods:{
+				handle:function(){
+					console.log(1)
+					hub.$emit('george-num',20)
+				}
+			},
+			mounted:function(){
+				hub.$on('george-num',(tomVal) =>{
+					this.num += tomVal 
+				})
+			}
+		})
+		 var app = new Vue({
+			el:'#app',
+			data:{
+				
+			},
+			methods:{
+				handle:function(){
+					hub.$off('tom-num')
+					hub.$off('george-num')
+				}
+				
+			}
+			
+		})
+	</script>
+</html>

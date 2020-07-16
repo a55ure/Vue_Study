@@ -1,0 +1,104 @@
+html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+			#app{
+				width: 80%;
+				height: 100%;
+				margin: auto;
+			}
+			.head{
+				margin: auto;
+				
+				margin-bottom: 30px;
+				text-align: center;
+				line-height: 50px;
+				height: 50px;
+				background-color: #6495ED;
+				color:white;
+				border-radius: 25px;
+				width: 60%;
+			}
+			.p_img{
+				float: left;
+			}
+			.p_img img{
+				height: 100px;
+				margin-right: 20px;
+			}
+			.p_option{
+				float: left;
+				margin-top: 33px;
+				
+			}
+			.p_option button{
+				height: 35px;
+				width: 65px;
+				border-radius: 20px;
+				border: none;
+				font-size: 20px;
+			}
+			.p_option input{
+				height: 35px;
+				border-radius: 20px;
+				border: #6495ED 1px solid;
+				text-indent: 16px;
+				width: 50px;
+				font-size: 18px;
+			}
+			.products{
+				text-align: center;
+				margin:  0 33%;
+				width: 48%;
+				height: 100px;
+				display: inline-block;
+			}
+			.butt_e{
+				background-color: red;
+				color: white;
+				margin-left: 10px;
+			}
+			.butt{
+				background-color: white;
+			}
+			.price{
+				font-size: 18px;
+			}
+			.checks{
+				float: left;
+				margin-top: 45px;
+				margin-right: 15px;
+			}
+			.account{
+				height: 100px;
+				width: 34%;
+				margin: auto;
+				margin-top: 50px;
+				/* background-color: #6495ED; */
+			}
+			.priceNum{
+				color: red;
+			}
+			.checkAll{
+				/* margin-left: 95px; */
+			}
+			.priceAll{
+				float: right;
+				 margin-right: 18px; 
+			}
+			.butt_fu{
+				
+				background-color: red;
+				color: white;
+				margin-left: 10px;
+				height: 35px;
+				width: 65px;
+				border-radius: 20px;
+				border: none;
+				font-size: 20px;
+			}

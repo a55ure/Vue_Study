@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/购物车.css"/>
+		<style>
+			html,body{
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			[v-cloak]{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<my-cart></my-cart>
+		</div>
+	</body>
+	<script>
+		var productFoot = {
+			data:function(){
+				return{
+					check:false
+				}
+			},
+			props:['list'],
+			template:`
+				<div class="account">
+					<input type="checkbox" class="checkAll" name="" id="" value="" v-model=check />
+					<div class="priceAll">
+						<span class="price">总计:$</span><span class="priceNum">{{total}}</span>
+						<button type="button" class="butt_fu">付款</button>
+					</div>
+					
+				</div>
+			`,
+			computed:{
+				// allChecked:function(){
+					
+				// 	this.$emit('all-checked')
+				// },
+				total:function(){
+					var all = 0
+					this.list.forEach(item =>{
+						all += item.price * item.num 
+					})
+					return all
+				}
+			},
+			methods:{
+				checkedchange:function(){
+					// this.check = 'checked'
+					 console.log('函数调用')
+					if(this.check){
+						this.$emit('all-checked',true)
+					}else{
+						this.$emit('all-checked',false)
+					}
+					 // console.log('函数正在调用')
+				}
+			},
+			watch:{
+				check:function(){
+					console.log('正在监听')
+					this.checkedchange()
+				}
+			}
+		}
+		var productHead = {
+			props:['uname'],
+			template:`
+				<div class="head">
+					<h2>{{uname}}的购物车</h2>
+				</div>
+			`
+		}
+		var productItem = {
+			
+			props:['list'],
+			template:`
+				<div >
+					<div class="products" :key='item.id' v-for='item in list' >
+						<input type="checkbox" class="checks" name="" :id="item.img" value=""  :checked="item.check" />
+						<label :for='item.img'>
+							<div class="p_img" >
+								<img :src="item.img" >
+							</div>
+						</label>
+						
+						<div class="p_option">
+							<button class="butt" type="button" @click='reduceNum(item.id)'>-</button>
+							<input type="text" id="" :value="item.num" @blur="changeNum(item.id,$event)" />
+							<button class="butt" type="button" @click='addNum(item.id)'>+</button>
+							<span class="price">价格:$</span><span class="priceNum">{{item.price}}</span>
+							<button class="butt_e" type="button" @click="delate(item.id)">删除</button>
+						</div>
+					</div>
+				</div>
+			`,
+			methods:{
+				// check:function(check){
+				// 	if(check == 'checked'){
+				// 		return check
+				// 	}
+				// },
+				addNum:function(id){
+					this.$emit('add-num',id)//将id传到父组件中，通过父组件对list 进行增加num数量
+				},
+				reduceNum:function(id){
+					// console.log(id)
+					this.$emit('reduce-num',id)//将id传到父组件，通过父组件对list 进行减少num
+				},
+				changeNum:function(id,event){
+					console.log(id,event)
+					this.$emit('change-num',{
+						id:id,
+						num:event.target.value //对输入框的数量直接填写数量把id num 传输到父组件进行处理
+					})
+				},
+				delate:function(id){
+					this.$emit('cart-del',id)//删除通过把id 传到父组件对list 进行处理
+				}
+			},
+			
+		}
+		Vue.component('my-cart',{
+			
+			data:function(){
+				return{
+					uname:'YKS',
+					list:[
+						{
+							id:1,
+							name:'Iphone11',
+							price:12,
+							num:1,
+							img:'img/11.jpg',
+							check:false
+							
+						},{
+							id:2,
+							name:'Airpods',
+							price:18,
+							num:1,
+							img:'img/airpoods.jpg',
+							check:true
+						},{
+							id:3,
+							name:'Air force',
+							price:20,
+							num:1,
+							img:'img/force.jpg',
+							check:false
+						},{
+							id:4,
+							name:'snoyCam',
+							price:30,
+							num:1,
+							img:'img/索尼.jpg',
+							check:false
+						}
+						
+					]
+				}
+			},
+			components:{
+				'product-head':productHead,
+				'product-item':productItem,
+				'product-foot':productFoot
+			},
+			template:`
+				<div>
+					<product-head v-bind:uname='uname'></product-head>
+					<product-item v-bind:list="list" @cart-del='delCart($event)' @change-num='changeNum($event)' @reduce-num='reduceNum($event)' @add-num='addNum($event)'></product-item>
+					<product-foot v-bind:list="list" @all-checked='allChecked($event)' ></product-foot>
+				</div>
+			`,
+			methods:{
+				allChecked:function(event){
+					console.log('已经调用')
+					if(event){
+						this.list.some(item =>{	
+							if(item.check == false){
+								item.check = true
+								console.log(item.check)
+							}
+								
+						})
+						console.log('全选')
+					}else{
+						console.log('全不选ing')
+						this.list.some(item =>{
+							if(item.check == true){
+								item.check = false
+								console.log(item.check)
+							}
+						})
+						console.log('全不选')
+						console.log(this.list)
+					}
+					// this.list.some(item =>{
+					// 	// if(item.check == false){
+					// 		item.check = true
+					// 		// console.log(item.check)
+					// 	// }
+					// })
+				},
+				addNum:function(id){
+					// console.log(id)
+					this.list.some(item =>{
+						if(item.id == id){
+							item.num ++
+							return true
+						}
+					})
+				},
+				reduceNum:function(id){
+					// console.log(id)
+					this.list.some(item =>{
+						if(item.id == id){
+							if(item.num > 0){
+								item.num --
+							}else{
+								return true
+							}
+							return true
+						}
+					})
+				},
+				changeNum:function(val){
+					// console.log(val)
+					//根据子组件中传来的数据来更新list 中的数据
+					this.list.some(item =>{
+						if(item.id == val.id){
+							item.num = val.num
+							return true
+						}
+					})
+				},
+				delCart:function(id){
+					//根据id删除数据
+					
+					console.log(id)
+					var index = this.list.findIndex(item=>{
+						return item.id == id
+					})
+					this.list.splice(index,1)
+				}
+			}
+		})
+		 var app = new Vue({
+			el:'#app',
+			data:{
+				
+			}
+		})
+	</script>
+</html>

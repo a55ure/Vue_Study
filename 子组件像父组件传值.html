@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<style>
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				padding: 0;
+			}
+
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="" v-bind:style="{fontSize: fontSize + 'px'}">
+				{{message}}
+			</div>
+			<menu-item @enlarge-text="handle($event)"></menu-item>
+		</div>
+	</body>
+	<script>
+		Vue.component('menu-item', {
+			props: ['value'], 
+			//接收传过来数值，是数组，里面放形参 
+			 // 父组件通过props把数据传给子组件
+			template: //自定义模板/在html的
+				`                                
+			<div>
+				<button @click='$emit("enlarge-text",5)'>大便大5</button>
+				<button @click='$emit("enlarge-text",50)'>大便大10</button>
+				<button @click='$emit("enlarge-text",15)'>大便大15</button>
+				<button @click='$emit("enlarge-text",-20)'>小编小-20</button>
+				
+			</div>
+			`//父组件可使用$emit触发父组件的自定义事件
+		})
+		var app = new Vue({
+			el: '#app',
+			data: {
+				fontSize: 10,
+				message: '数据'
+			},
+			methods: {
+				handle: function(val) {
+					this.fontSize += val
+				}
+			}
+		})
+	</script>
+</html>
