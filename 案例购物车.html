@@ -23,6 +23,7 @@
 		</div>
 	</body>
 	<script>
+// --------------------------------底部组件----------------------------------------------------------------------------------------------------------------------------------------------------
 		var productFoot = {
 			data:function(){
 				return{
@@ -54,6 +55,16 @@
 				}
 			},
 			methods:{
+				// nonCheck:function(){
+				// 	console.log('正在检查全选')
+				// 	// var nonflag = true
+				// 	this.list.forEach(item =>{
+				// 		if(item.check == false){
+				// 			this.check = false
+				// 			return 
+				// 		}
+				// 	})
+				// },
 				checkedchange:function(){
 					// this.check = 'checked'
 					 console.log('函数调用')
@@ -62,6 +73,7 @@
 					}else{
 						this.$emit('all-checked',false)
 					}
+					
 					 // console.log('函数正在调用')
 				}
 			},
@@ -72,6 +84,8 @@
 				}
 			}
 		}
+// --------------------------------底部组件----------------------------------------------------------------
+// --------------------------------头部组件----------------------------------------------------------------
 		var productHead = {
 			props:['uname'],
 			template:`
@@ -80,13 +94,15 @@
 				</div>
 			`
 		}
+// --------------------------------头部组件----------------------------------------------------------------
+// --------------------------------中间组件----------------------------------------------------------------
 		var productItem = {
 			
 			props:['list'],
 			template:`
 				<div >
 					<div class="products" :key='item.id' v-for='item in list' >
-						<input type="checkbox" class="checks" name="" :id="item.img" value=""  :checked="item.check" />
+						<input type="checkbox" class="checks" name="" :id="item.img" value=""  :checked='item.check' @click='check(item.check)'/>
 						<label :for='item.img'>
 							<div class="p_img" >
 								<img :src="item.img" >
@@ -104,11 +120,13 @@
 				</div>
 			`,
 			methods:{
-				// check:function(check){
-				// 	if(check == 'checked'){
-				// 		return check
-				// 	}
-				// },
+				check:function(check){
+					console.log('检查checkde'+check)
+					
+					if(check == false){
+						console.log('检查checkde')
+					}
+				},
 				addNum:function(id){
 					this.$emit('add-num',id)//将id传到父组件中，通过父组件对list 进行增加num数量
 				},
@@ -127,13 +145,21 @@
 					this.$emit('cart-del',id)//删除通过把id 传到父组件对list 进行处理
 				}
 			},
+			watch:{
+				// item.check:function(){
+				// 	console.log('正在监听，中间组件的check')
+				// }
+			}
 			
 		}
+// --------------------------------中间组件----------------------------------------------------------------
+// --------------------------------父组件----------------------------------------------------------------
 		Vue.component('my-cart',{
 			
 			data:function(){
 				return{
 					uname:'YKS',
+					noCheck:false,
 					list:[
 						{
 							id:1,
@@ -182,6 +208,16 @@
 				</div>
 			`,
 			methods:{
+				nonCheck:function(){
+					console.log('正在检查全选')
+					// var nonflag = true
+					this.list.forEach(item =>{
+						if(item.check == false){
+							this.noCheck = false
+							return 
+						}
+					})
+				},
 				allChecked:function(event){
 					console.log('已经调用')
 					if(event){
@@ -254,6 +290,7 @@
 				}
 			}
 		})
+// --------------------------------父组件----------------------------------------------------------------
 		 var app = new Vue({
 			el:'#app',
 			data:{

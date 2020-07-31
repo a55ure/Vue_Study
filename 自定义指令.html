@@ -23,10 +23,31 @@
 	</head>
 	<body>
 		<div id="app" >
-			<button type="button" v-color="bgc">变色</button>
+			<!-- <button type="button" v-color="bgc">变色</button> -->
+			<input type="text" name="" id="" value="" v-valuenter />
+			<input type="text" name="" id="" value="" v-focus />
+			<input type="text" name="" id="" value="" v-bgc = "message" />
+			
+			
 		</div>
 	</body>
 	<script>
+		Vue.directive('bgc',{
+			bind:function(el,binding){
+				console.log(binding);
+				el.style.backgroundColor = binding.value.color
+			}
+		})
+		Vue.directive('valuenter',{
+			inserted:function(el){
+				el.value = 1000
+			}
+		})
+		Vue.directive('focus',{
+			inserted:function(el){
+				el.focus()
+			}
+		})
 		Vue.directive('color',{
 			bind:function(el,binging){
 				console.log(binging.value)
@@ -36,7 +57,10 @@
 		 var app = new Vue({
 			el:'#app',
 			data:{
-				bgc:'yellow'
+				bgc:'yellow',
+				message:{
+					color:'blue'
+				}
 			}
 		})
 	</script>
